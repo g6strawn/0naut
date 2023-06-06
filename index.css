@@ -1,0 +1,400 @@
+/* Home page */
+@import "/content/pow2/index.css";
+
+/* Contact Us */
+#contact { text-align: center; }
+#contact img { display: inline;  vertical-align: bottom; }
+#contact address { margin-bottom: 0.5em;  font-style: normal; }
+#contactName, #contactEmail, #contactMsg {
+  width: 100%;
+  margin: 2px auto;
+}
+#contactMsg {
+  height: 5.5em;
+  min-height: 4em;
+  resize: vertical;
+}
+#contactMsg:focus { animation: contactFlash 0.2s ease 0s 6 alternate; }
+@keyframes contactFlash {
+  from { box-shadow: none; }
+  to   { box-shadow: 0 0 1em 0.5em rgba(255, 69, 0, 0.6); }
+}
+
+
+/* captcha - try to prevent form bots */
+.captcha {
+  margin: 0 auto;  padding: 2px;
+  width: 282px;
+  border: 1px solid var(--darkBorder);
+  border-radius: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.captcha p {
+  width: 100%;
+  margin: 2px auto;
+  text-align: center;
+}
+.captcha label {
+  width: 92px;
+  white-space: nowrap;
+  text-align: left;
+}
+.captcha input[type="radio"] {
+  width: auto;
+  margin: auto 2px;
+  vertical-align: -2px;
+  font-size: 10pt;
+}
+.captcha .human { color: green; }
+.captcha .bot { color: red; }
+
+
+/* Account page */
+#whyReg { max-width: 500px; }
+#whyReg img {
+  float: right;
+  margin: 4px 0 4px 4px;
+  border: 1px solid grey;
+  border-radius: 4px;
+}
+
+#account .floatBox { width: 300px;  font-size: 11pt; }
+#account input[placeholder], 
+#account select, 
+#account textarea {
+  width: 100%;
+  margin: 2px auto;
+}
+#account #email2, 
+#account #pswd2 {
+  margin-bottom: 1em;
+}
+#account textarea {
+  height: 7em;  min-height: 5em;
+  resize: vertical;
+}
+#account textarea#remarks { margin-bottom: 0.9em; }
+#account textarea#notes { margin-top: 0.9em; }
+#account .centered {
+  text-align: center;
+  margin: 0.5em auto;
+}
+#account .captcha { margin: 1.5em auto; }
+#account #flag_boxes label {
+  display: inline-block;
+  width: 90px;
+  white-space: nowrap;
+  text-align: left;
+}
+#account button[type="submit"] {
+  display: block;
+  margin: 0.5em auto;
+}
+
+input, select, textarea {
+  padding-left: 4px;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+input[type=submit] { cursor: pointer; }
+input[type="checkbox"] {
+  position: relative;
+  vertical-align: middle;
+  bottom: .08em;
+  width: 1.15em;  height: 1.15em;
+  margin-right: 0.25em;
+  cursor: pointer;
+  mix-blend-mode: luminosity; /* fix Chrome 83 (30 Mar 2020) change to checkbox style */
+}
+
+
+.boxes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  margin: 0.5em;
+}
+.boxes>.floatBox {
+  margin: 0.5em; /* width != auto so flexbox can justify-content:center */
+}
+
+.floatBox { /* centered, background, border, and shadow */
+  display: table;
+  margin: 0.5em auto;
+  padding: 0.5em;
+  color: black;  background-color: gainsboro;
+  border: 1px solid black;
+  border-radius: 4px;
+  box-shadow: 3px 4px 5px rgba(0,0,0,0.6);
+}
+
+
+/* home page content boxes */
+#blogBoxes {
+  margin: 2em auto;
+  padding-bottom: 1.5em;
+  background-color: darkseagreen;
+  border-radius: 8px;
+}
+.blogBox {
+  width: 350px; height: 200px;
+  display: table;
+  margin: 0.5em;
+  padding: 0.5em;
+  border: 1px solid black;
+  border-radius: 4px;
+  box-shadow: 3px 4px 5px rgba(0,0,0,0.6);
+}
+.blogBox:hover {
+  position: relative;  top: 2px;
+  box-shadow: 1px 2px 3px rgba(0,0,0,0.8);
+}
+.blogBox h1 {
+  margin: 0 4px;
+}
+.blogBox h2 {
+  margin: 0.25em 4px;
+  font-size: 9pt;
+}
+
+#blogBoxes details, #xkcd details {
+  width: 80%;
+  margin: 1em auto 0 auto;
+  color: black;
+}
+#blogBoxes details summary, #xkcd details summary {
+  text-align: center;
+  font-weight: bold;
+}
+
+
+/* interactive articles */
+#book {
+  color: #783105;  background-color: lightskyblue;
+  background-image: url('/content/book/book.png');
+}
+#invest {
+  color: black;  background-color: rgb(41,95,166);
+  background-image: url('/content/invest/invest.png');
+}
+#lander {
+  color: black;  background-color: white;
+  background-image: url('/content/lander/landing.png');
+}
+#rights {
+  color: #949aac;  background-color: #33004D;
+}
+#rights div {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+#rights img {
+  border: 4px ridge #4d3300;
+  box-shadow: 2px 3px 5px rgba(0,0,0,0.3);
+}
+#rights img:hover {
+  position: relative;  top: 2px;
+  box-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+
+/* xkcd */
+#xkcd {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2em 0;
+  background-color: #96A8C8;
+  border-radius: 8px;
+}
+#xkcd section {
+  margin: 0 auto;
+  padding: 0.5em;
+  min-width: 300px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 4px;
+  box-shadow: 3px 4px 5px rgba(0,0,0,0.6);
+}
+#xkcd section img {
+  max-width: 100%;
+  height: auto;
+}
+
+#xkcd_hdr h1 {
+  float: right;
+  margin: 0;
+  color: black;
+  font-size: 14pt;
+  text-align: center;
+  max-width: 205px;
+}
+#xkcd_title {
+  font-size: 12pt;
+  white-space: nowrap;
+}
+#xkcd1190_thumb {
+  float: left;
+  margin: 0 20px 0 0;
+}
+
+
+#blix {
+  display: grid;
+  margin: auto;  padding: 0.5em;
+  grid-template-columns: repeat(3, auto);
+  gap: 4px;
+  justify-content: center;
+  background-color: #333;
+  border: 6px ridge #666;
+  border-radius: 4px;
+}
+#blix div:nth-child(3)  { margin-bottom: 6px; }
+#blix div:nth-child(12) { margin-bottom: 6px; }
+#blix div:nth-child(18) { margin-bottom: 6px; }
+#blix div { width: 1em;  height: 1em; }
+.blix0 { background-color: #121212; }
+.blix1 { background-color: red; }
+.blix2 { background-color: green; }
+.blix3 { background-color: blue; }
+.blix4 { background-color: yellow; }
+.blix5 { background-color: orange; }
+
+
+#cisterian { margin: auto;  padding: 0.5em; }
+#cisterian>canvas { display: block; }
+#cisterian>div {
+  margin-top: 1em;
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+#cisterian>div>input {
+  color: whitesmoke;
+  background-color: #444;
+  width: 5em;
+}
+#cisterian .popup { color: #666; }
+
+#dungeon { position: relative; }
+#dungeonDoor {
+  display: block;
+  border-radius: 20px;
+}
+#dungeonEyes {
+  position: absolute;
+  top: 150px;  left: 95px;
+}
+#dungeon h1 {
+  position: absolute;
+  top: 5px;  right: 10px;
+  margin: 0;
+  text-align: right;
+  color: #313;
+  user-select: none;
+  text-shadow: #FC0 0 0 10px;
+  animation-duration: 1s;
+  animation-timing-function: step-end;
+}
+
+@keyframes flicker1 { /* one shadow flicker */
+  0% { text-shadow: none; }
+  5% { text-shadow: #FC0 0 0 10px; }
+}
+@keyframes flicker2 { /* double shadow flicker */
+   0% { text-shadow: none; }
+   5% { text-shadow: #FC0 0 0 10px; }
+  10% { text-shadow: none; }
+  15% { text-shadow: #FC0 0 0 10px; }
+}
+@keyframes flicker3 { /* triple shadow flicker */
+   0% { text-shadow: none; }
+   5% { text-shadow: #FC0 0 0 10px; }
+  10% { text-shadow: none; }
+  20% { text-shadow: #FC0 0 0 10px; }
+  40% { text-shadow: none; }
+  45% { text-shadow: #FC0 0 0 10px; }
+}
+@keyframes flicker4 { /* flicker, pause, flicker */
+   0% { text-shadow: none; }
+   5% { text-shadow: #FC0 0 0 10px; }
+  90% { text-shadow: none; }
+  95% { text-shadow: #FC0 0 0 10px; }
+}
+@keyframes flicker5 { /* short flicker, long flicker */
+   0% { opacity: 0; }
+   5% { opacity: 1; }
+  20% { opacity: 0; }
+  50% { opacity: 1; }
+}
+@keyframes flicker6 { /* flicker, pause, long flicker */
+   0% { text-shadow: none; }
+   5% { text-shadow: #FC0 0 0 10px; }
+  60% { text-shadow: none; }
+  65% { opacity: 0; }
+  90% { opacity: 1; }
+  95% { text-shadow: #FC0 0 0 10px; }
+}
+@keyframes flicker7 { /* full off */
+   0% { opacity: 0; }
+}
+@keyframes flicker8 { /* off, brief on, off */
+  10% { opacity: 0; }
+  60% { opacity: 1; }
+  65% { opacity: 0; }
+}
+@keyframes flicker9 { /* tilt */
+   0% { transform: skewX(15deg); }
+}
+@keyframes flicker10 { /* tilt both ways */
+   0% { opacity: 0; }
+  10% { opacity: 1; transform: skewX(-15deg); }
+  30% { opacity: 0; }
+  40% { opacity: 1; transform: skewX(15deg); }
+  60% { opacity: 0; }
+  70% { opacity: 1; transform: none; }
+}
+@keyframes flicker11 { /* flicker, red, flicker */
+   0% { opacity: 0; }
+  10% { opacity: 1; text-shadow: #C60 0 0 10px; color: #600; }
+  90% { opacity: 0; }
+}
+@keyframes flicker12 { /* crazy */
+   0% { text-shadow: none; }
+   5% { text-shadow: #FC0 0 0 10px; color: #600; }
+  10% { opacity: 0; }
+  15% { opacity: 1; transform: skewX(15deg); }
+  40% { opacity: 0; }
+  45% { opacity: 1; transform: skewX(-15deg); }
+  70% { opacity: 0; }
+  90% { opacity: 1; transform: skewX(15deg);  color: #FC0; }
+  95% { opacity: 0; }
+}
+
+
+#tesla details {
+  margin: 1em auto;
+  padding: 1em 1em 1em 2em;
+  width: 100%;
+  color: black;
+  background-color: white;
+  border-radius: 0.5em;
+}
+#tesla h1 {
+  display: inline;
+  margin-top: 0;
+  font-size: 14pt;
+}
+#tesla label {
+  display: block;
+}
+#tesla #resume {
+  width: 100%;
+  height: 900px;
+}

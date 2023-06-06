@@ -1,0 +1,395 @@
+/* border-box - Include internal padding in element's width/height.
+  Without this, 'width:100%' will not include padding, making element's 
+  total size larger than parent's bounds. This fixes the stupid default.
+*/
+html { box-sizing: border-box; }
+*, *:before, *:after { box-sizing: inherit; }
+
+/* print better - show inline links, titles, dfn */
+@media print {
+  *, *:before, *:after {
+    color: #000 !important;
+    text-shadow: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+  a[href]:after  { content: " (" attr(href) ") "; }
+  abbr[title]:after, dfn[title]:after { content: " (" attr(title) ") "; }
+}
+
+/* hide/show element depending on screen size
+  narrow_only - mobile devices
+  wide_only   - tablets, desktops, etc.
+  superwide_only - desktop full-screen
+*/
+.narrow_only { display: none; }
+@media all and (max-width: 540px) {
+  .narrow_only { display: initial; }
+  .wide_only { display: none; }
+}
+@media all and (max-width: 750px) {
+  .superwide_only { display: none; }
+}
+
+/* prevent narrow paragraphs */
+p:before {
+  content: "";
+  width: 10em;
+  display: block;
+  overflow: hidden;
+}
+
+/* === general formatting === */
+body {
+  margin: 0 auto;  padding: 1em;
+  max-width: 1000px;
+  color: white;  background-color: #222;
+  font: 12pt Verdana, Geneva, sans-serif;
+}
+ 
+p { margin-bottom: 1em; }
+
+/* invalid input (not placeholder) is red */
+input:invalid:not(:placeholder-shown), .invalid {
+  border-color: #900;
+  background-color: #FAA;
+}
+/* <select> elements without "required" must use:
+HTML:  <select name="foo" class="select-placeholder">
+JS: document.querySelector('select[name="foo"]').addEventListener('change', 
+  e => e.currentTarget.classList.remove('select-placeholder'));
+*/
+select:required:invalid, .select-placeholder { color: grey; }
+option[value=""][disabled] { display: none; }
+option { color: black; }
+
+/* definition list - single line instead of two */
+dl {
+  display: grid;
+  grid-template-columns: max-content auto;
+  justify-content: center;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+dt { grid-column-start: 1;  text-align: right; }
+dd { grid-column-start: 2;  margin-inline-start: 0.5em; }
+
+
+.left  { float: left;  margin: 0.25em 0.75em 0.25em 0; }
+.right { float: right;  margin: 0.25em 0 0.25em 0.7em; }
+.center { display:table;  margin: 0.25em auto; } /* NOTE: element must set its width */
+
+
+/* === message/error dialog (ex: div, not modal) === */
+.msgBox, .errBox {
+  justify-content: center;
+  text-align: center;
+  max-width: 400px;
+  margin: 1em auto;  padding: 0.5em;
+}
+.errBox {
+  color: darkred;  background-color: lightpink;
+  border: 2px solid darkred;
+  font-size: 16pt;  font-weight: bold;
+}
+.msgBox p { text-align: left; }
+.xdebug-var-dump { width: 100%; }
+
+
+/* === popup box - like a tooltip but click instead of hover === */
+.popup {
+  position: relative;
+  cursor: pointer;
+}
+.popup > div {
+  visibility: hidden;
+  position: absolute;
+  z-index: 1;
+  width: 200px;
+  margin-left: -100px;
+  bottom: 150%;
+  left: 50%;
+  color: white;
+  background-color: #444;
+  text-align: center;
+  font-size: smaller;
+  padding: 0.5em;
+  border-radius: 6px;
+}
+.popup > div::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -8px;
+  border-width: 8px;
+  border-style: solid;
+  border-color: #444 transparent transparent transparent;
+}
+.popup[open] > div {
+  visibility: visible;
+  animation: fadeIn 1s
+}
+.popup > div a { color: inherit; }
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+
+
+/* === modal dialog box - centered with page greyed out === */
+.modal { /* background */
+  position: fixed;
+  left: 0;  top: 0;
+  width: 100%;  height: 100%;
+  z-index: 1;
+  background-color: rgba(0,0,0,0.9);
+}
+.modal>div { /* dialog container */
+  margin: 10% auto;
+  padding: 0.5em 1em 1em 1em;
+  max-width: 20em;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 8px;
+  position: relative;
+  animation: slideFromTop 0.5s;
+}
+@keyframes slideFromTop {
+  from { top: -300px;  opacity: 0 }
+  to   { top: 0;       opacity: 1 }
+}
+.modal .closeBtn, .modal .closeBtn:active {
+  position: absolute;
+  top: -10px;  right: -10px;
+  margin: 0;  padding: 0;
+  width: 30px;  height: 30px;
+  border-radius: 50%;
+  box-shadow: none;
+}
+
+
+/* === login dialog === */
+#loginBox>div {
+  width: 17em;
+  background-color: gainsboro;
+}
+#loginHdr {
+  margin: 0 auto 0.25em auto;
+  text-align: center;
+  color: black;
+}
+#loginEmail, #loginPswd {
+  width: 100%;
+  margin: 2px auto;
+  padding: 4px;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+#loginSubmit {
+  width: 100%;
+  margin: 4px auto;
+}
+#loginRemember {
+  display: block;
+  margin: 2px auto;
+  text-align: center;
+  color: black;
+  cursor: pointer;
+}
+#loginRemember input[type="checkbox"] {
+  margin-right: 0.5em;
+}
+#loginHdr.error {
+  color: brown;
+  animation: focusFlash 0.2s ease 0s 6 alternate;
+}
+#loginOptional {
+  text-align: center;
+  color: dimgray;
+  font-size: smaller;
+  margin-bottom: 0;
+}
+
+@keyframes focusFlash {
+  from { box-shadow: none; }
+  to   { box-shadow: 0 0 1em 0.5em rgba(255, 69, 0, 0.6); }
+}
+
+
+/* === site header & footer === */
+#siteHdr {
+  margin: 0 auto 10px auto;
+  min-width: 300px;
+  height: 3em;
+  background-color: transparent;
+}
+#siteHdr #hdrLogo {
+  float: left;
+  padding-right: 10px;
+  animation: spin 300s infinite linear reverse;
+}
+
+#siteHdr #hdrName {
+  margin: 0;
+  float: left;
+  color: black;
+  text-shadow: 0 0 4px #7DF9FF, 0 0 8px #228dff, 0 0 20px blue;
+  transition: 4s ease-out;
+}
+#siteHdr #hdrName:focus,
+#siteHdr #hdrName:hover,
+#siteHdr #hdrName:target {
+color: #7DF9FF;
+text-shadow: 0 0 1px black, 0 0 4px #7DF9FF, 0 0 8px #228dff, 0 0 20px blue;
+transition: 0.5s ease-in;
+}
+
+#siteHdr #hdrDbl {
+  float: right;
+  width: 3em;  height: 2.5em;
+  opacity: 0;
+}
+#siteHdr #hdrLogin {
+  float: right;
+  max-width: 10em; /* truncate long usernames */
+  overflow: hidden;
+}
+
+#siteFtr {
+  width: 80%;
+  margin: 2em auto;
+  text-align: center;
+  clear: both;
+}
+#siteFtr img#ftrLogo {
+  float: left;
+  display: inline;
+  margin-right: 0.5em;
+  animation: spin 300s infinite linear;
+}
+#siteFtr div#ftrCopyright {
+  font-size: small;
+  margin: 1em auto;
+  white-space: nowrap;
+  color: gray;
+}
+#siteFtr div#ftrCopyright a { color: lightgray; }
+
+#siteFtr #toTop {
+  float: right;
+  margin: auto;
+  padding: 6px 8px 0 8px
+}
+
+
+noscript>p {
+  margin: 1em auto;  padding: 1em;
+  width: 90%;
+  background-color: yellow;
+  border: 2px solid black;
+}
+
+
+/* === blue button - big, 3D, glowy; or small or spinny === */
+.blueBtn {
+  margin: 0.5em;
+  padding: 3px 5px;
+  color: white;
+  background: hsl(206, 70%, 30%)
+    linear-gradient(hsl(203, 50%, 50%) 10%, hsl(206, 70%, 30%) 90%);
+  border:  1px solid midnightblue;
+  border-radius: 6px;
+  box-shadow: 3px 4px 5px rgba(0,0,0,0.6);
+  cursor: pointer;
+}
+.blueBtn:hover:enabled, .blueBtn:focus:enabled {
+  color: lightgoldenrodyellow;
+  text-shadow: 0 0 8px lightgoldenrodyellow;
+}
+.blueBtn:active, .blueBtn.pressed {
+  position: relative;  top: 2px;
+  outline: none;
+  box-shadow: 0 0 0 0 black, inset 0 0 6px 0 black;
+}
+.blueBtn:disabled {
+  cursor: default;
+  background: hsl(210, 100%, 20%);
+  box-shadow: 3px 4px 5px rgba(0,0,0,0.6) inset;
+  opacity: 0.8;
+}
+
+button.large {
+  font-size: 16pt;
+  padding: 0.25em 0.5em;
+  border-radius: 10px;
+}
+button.tiny {
+  margin: 0;  padding: 2px 3px;
+  font-size: 9pt;
+  line-height: 1;
+  vertical-align: baseline;
+  border-radius: 4px;
+  box-shadow: none;
+}
+button.round {
+  margin: 0;  padding: 1px 4px;
+  font-size: 12pt;
+  border-radius: 50%;
+  box-shadow: 2px 3px 5px rgba(0,0,0,0.4);
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg) }
+  to   { transform: rotate(359deg) }
+}
+.spin { animation: spin 5s infinite linear; }
+
+
+/* === table of contents === */
+nav.contents {
+  margin: 1em;
+  text-align: center;
+}
+@media screen and (max-width: 600px) { nav.contents { font-size: 10pt; } }
+nav.contents div { /* nav is full width, div is centered */
+  display: inline-block;
+  padding: 1em 2em 1em 4em;
+  color: black;  background-color: lightgray;
+  border-radius: 0.5em;
+}
+nav.contents h2 { 
+  margin: 0 0 4px 0;
+  font-size: 1.4em;
+}
+nav.contents h2 a {
+  color: initial;
+  text-decoration: none;
+}
+nav.contents ol {
+  margin: 0;
+  text-align: left;
+  list-style-type: none;  /* numbering set by counters() */
+  counter-reset: pageNum;
+}
+nav.contents li {
+  white-space: nowrap;
+  padding: 1px 0;
+  position: relative;  /* see Next button */
+}
+nav.contents li:before {
+  counter-increment: pageNum;
+  content: counters(pageNum,".") ") ";
+  color:initial;
+}
+nav.contents li a {
+  text-decoration: none;
+  color: initial;
+}
+nav.contents button, /* Next button */
+nav.contents button.blueBtn:active,
+nav.contents button.blueBtn.pressed {
+  position: absolute;
+  left: -5em;  top: -2px;
+  margin: 0;
+}
