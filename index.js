@@ -72,23 +72,23 @@ function Blix(time=null, blix=null) {
 
 
 //---------------------------------------------------------------------------
-//Cisterian - draw Cisterian numerals (0-9999)
-var g_cisterianTimeoutID = 0; //update time display
-function Cisterian(num) {
+//Cistercian - draw Cistercian numerals (0-9999)
+var g_cistercianTimeoutID = 0; //update time display
+function Cistercian(num) {
 	num = parseInt(num);
 	if(isNaN(num)  ||  num < 0  ||  num > 9999) {
 		//default = time = 4 digits = hhmm
 		const now = new Date();
 		num = (now.getHours() * 100) + now.getMinutes();
 		const secRemain = ((60-now.getSeconds()) ?? 60); //seconds until next minute
-		g_cisterianTimeoutID = setTimeout(Cisterian, secRemain * 1000, 'time');
-	} else if(g_cisterianTimeoutID) {
-		clearTimeout(g_cisterianTimeoutID); //stop updating time
-		g_cisterianTimeoutID = 0;
+		g_cistercianTimeoutID = setTimeout(Cistercian, secRemain * 1000, 'time');
+	} else if(g_cistercianTimeoutID) {
+		clearTimeout(g_cistercianTimeoutID); //stop updating time
+		g_cistercianTimeoutID = 0;
 	}
 
 	//get canvas context
-	const eCanvas = document.querySelector('#cisterian>canvas');
+	const eCanvas = document.querySelector('#cistercian>canvas');
 	const ctx = eCanvas?.getContext('2d');
 	if(!eCanvas || !ctx)  return;
 
@@ -104,7 +104,7 @@ function Cisterian(num) {
 	ctx.strokeStyle = 'whitesmoke';
 	ctx.lineCap = ctx.lineJoin = 'round';
 	console.assert(eCanvas.width >= ((third*2)+(pad*3)), 
-		'Cisterian canvas is too narrow. width should be >= '+ ((third*2)+(pad*3)));
+		'Cistercian canvas is too narrow. width should be >= '+ ((third*2)+(pad*3)));
 
 	//center staff
 	ctx.clearRect(0, 0, eCanvas.width, eCanvas.height);
@@ -132,7 +132,7 @@ function Cisterian(num) {
 	DrawDigit((num/100)%10,  xMid, xMid+third, yMax, yMid2); //bottom right
 	DrawDigit((num/1000)%10, xMid, xMid-third, yMax, yMid2); //bottom left
 	ctx.stroke();
-} //Cisterian
+} //Cistercian
 
 
 //---------------------------------------------------------------------------
@@ -184,6 +184,6 @@ function DungeonText() {
 if(document.getElementById('pow2Board'))  setTimeout(pow2.Autoplay, 2*1000);
 if(document.getElementById('xkcdTemplate'))  FetchXkcd();
 if(document.getElementById('blix'))  { Blix();  setInterval(Blix, 5*1000); }
-if(document.getElementById('cisterian'))  Cisterian();
+if(document.getElementById('cistercian'))  Cistercian();
 if(document.getElementById('dungeon'))  SpookyEyes();
 if(document.getElementById('dungeonText'))  setTimeout(DungeonText, 8*1000);

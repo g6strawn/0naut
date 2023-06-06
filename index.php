@@ -16,11 +16,11 @@ if(!IsSignedIn()) {
 <!-- Blinking Lights -->
 <div id="blix"></div>
 
-<!-- Cisterian Numerals -->
-<div id="cisterian" title="Cisterian">
+<!-- Cistercian Numerals -->
+<div id="cistercian" title="Cistercian">
   <canvas width="120" height="160">Update your browser</canvas>
   <div>
-    <input type="number" min=0 max=9999 oninput="Cisterian(this.value)">
+    <input type="number" min=0 max=9999 oninput="Cistercian(this.value)">
     <span class="popup">?
       <div>What is this?<br><br>
         Take a <em>*couple minutes*</em> to see if you can figure it out.<br><br>
