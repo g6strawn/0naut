@@ -1,0 +1,199 @@
+/* Copyright (c) 2022 Gary Strawn, All rights reserved */
+
+body {
+  margin: 0;  padding: 0;
+  color: silver;
+  background-color: black;
+}
+
+.closeBtn, .topBtn {
+  position: absolute;
+  top: -0.75em;
+  padding: 1px 4px;
+  font-size: 10pt;
+  font-weight: bold;
+  color: #cc0;
+  background-color: black;
+  border: 2px outset silver;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.closeBtn { right: -0.75em; }
+
+dialog {
+  position: fixed; /* allow closeBtn */
+  padding: 1em;
+  text-align: center;
+  color: silver;
+  background-color: rgba(0,0,0, 0.5);
+  border: 1px solid #3bf;
+  border-radius: 0.5em;
+  box-shadow: 0 0 10px #3bf;
+}
+
+/* topInfo - info box at top of screen*/
+#topInfo {
+  position: absolute;
+  top: 0.75em;
+}
+#infoPlayer {
+  margin: 0;
+  font-size: 10pt;
+}
+#entSelect { margin-top: 1em; }
+
+/* msgBox - message/error dialog box at center of screen */
+dialog.msgBox, dialog.errBox {
+  position: absolute;
+  top: 50%;  transform: translateY(-50%);
+  background-color: rgba(0,0,0, 0.8);
+  text-align: center;
+}
+dialog.errBox {
+  color: white;
+  background-color: rgba(64,0,0, 0.8);
+  border: 1px solid firebrick;
+  box-shadow: 0 0 10px firebrick, 0 0 15px firebrick;
+}
+.msgBoxBtns {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1em;
+  gap: 1em;
+}
+.msgBoxBtns button {
+  color: #cc0;
+  background-color: black;
+  border: 2px outset silver;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+/* msgLog - message log at bottom of screen */
+#msgLog, #msgLogAlone {
+  position: absolute;
+  bottom: 0;
+  padding-bottom: 0.5em;
+  max-width: 100%;
+  text-align: left;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+#msgLog #logMsgs {
+  margin: 0 0 4px 0;
+  height: 5em;
+  min-width: 30em;
+  font-size: 10pt;
+  color: gray;
+  background-color: rgba(0,0,0, 0.5);
+  border: none;
+  resize: none;
+  overflow-y: auto;
+  overflow-x: hidden;
+  white-space: pre-wrap;
+}
+#msgLogAlone { /* contains new messages visible when msgLog is closed */
+  left: 50%;  transform: translateX(-50%);
+  border: none;
+  background-color: transparent;
+  text-shadow: 0 0 2px black, 0 0 4px black, 0 0 6px black;
+}
+
+/* msgLog fading */
+:root {
+  --msgLogFadeStart: 5s; /* time that new messages stay new */
+  --msgLogFadeDuration: 2s; /* transition from new to old */
+}
+#logMsgs p, #msgLogAlone p {
+  margin: 0;
+  transition: opacity var(--msgLogFadeDuration), filter var(--msgLogFadeDuration);
+}
+#logMsgs     p.msgLogNew {              filter: brightness(200%); }
+#msgLogAlone p.msgLogNew { opacity: 1;  filter: brightness(200%); }
+#msgLogAlone p           { opacity: 0; } /* start fading when no longer new */
+
+#msgLog #logCmd {
+  font-size: 12pt;
+  width: 100%;
+  color: silver;
+  background-color: rgba(0,0,0, 0.5);
+  border: 1px solid dimgray;
+}
+
+#msgLog .topBtn {
+  color: #3bf;
+  background-color: transparent;
+  text-shadow: black 0 0 2px, black 0 0 4px, black 0 0 6px;
+  border: none;
+  font-size: 14pt;
+}
+#msgLog #logTime  { right: 4.25em; }
+#msgLog #logClear { right: 3em; }
+#msgLog #logMax   { right: 1.75em; }
+#msgLog.logMaximize #logMsgs { height: 15em; }
+#msgLog.logMaximize #logMax  { transform: rotate(180deg) translateY(-4px); }
+#msgLog.logShowTime #logTime { transform: rotate(90deg); }
+span.logTimestamp {
+  display: none;
+  color: green;
+}
+#msgLog.logShowTime span.logTimestamp { display: inline; }
+
+
+/* loading progress bar */
+#loading {
+  position: absolute;
+  top: 20%;  left: 50%;
+  transform: translateX(-50%);
+  margin: 1em;
+  padding: 1em;
+  text-align: center;
+  background-color: transparent;
+  border-radius: 0.5em;
+}
+#loading h1 {
+  color: #313;
+  text-shadow: #FC0 0 0 10px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  animation: pulseText 200ms ease-in-out alternate infinite;
+}
+@keyframes pulseText {
+  from {
+    text-shadow: #FC0 0 0 10px;
+  } to {
+    text-shadow: #FC0 0 0 12px;
+  }
+}
+
+#loading>div {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+#loading>div>span {
+  font-size: x-large;
+}
+#loadProgress {
+  width: 20em;
+  height: 1em;
+  margin: 0 0.5em;
+  background-color: transparent;
+  filter: drop-shadow(0 0 5px #3bf);
+}
+#loadProgress::-webkit-progress-value {
+  background-color: #3bf;
+  border-radius: 8px;
+}
+#loadProgress::-webkit-progress-bar {
+  background: transparent;
+  border: 1px solid #3bf;
+  border-radius: 8px;
+}
+#loadStatus {
+  margin: 0;
+  text-shadow: 0 0 2px black, 0 0 4px black;
+}
+
+
+#citations { display: none; }
