@@ -1,0 +1,49 @@
+body {
+  color: gray;
+  background-color: #121212;
+}
+
+article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+div#imgBox {
+  margin: 0.5em auto;
+  border: 0.5em solid gainsboro;
+  border-radius: 4px;
+  position: relative;
+  background-color: darkgray;
+}
+div#imgBox img {
+  display: block; /* no bottom pixels */
+  max-width: 100%;
+  height: auto;
+}
+div#imgBox img#playBtn {
+  display: none;
+  margin: auto;
+  position: absolute;
+  top: 0;  left: 0;  bottom: 0;  right: 0;
+}
+
+div#license, div#license a {
+  font-size: 10pt;
+  color: #444;
+}
+
+div#currInfo {
+  margin-top: 1em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center
+}
+
+#progBar {
+  width: 300px;
+  vertical-align: middle;
+}
+
+#editDelay:disabled { background-color: transparent; }
