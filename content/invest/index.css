@@ -1,0 +1,193 @@
+@import "/inc/blogs.css";  /* styles common across blog articles */
+
+nav.rules ol {
+  text-align: left;
+  padding-right: 1em;
+}
+nav.rules li {
+  white-space: nowrap;
+  padding: 1px 0;
+  position: relative;  /* see Next button */
+}
+
+#except {
+  font-size: 12pt;
+  font-weight: 600;
+}
+
+.tanbox {
+  color: #330000;  background-color: #D9BC85;
+  margin: 0 auto 1em 2em;  padding: 1em;
+  display: table;
+}
+
+q {
+  font-family: Georgia, serif;  font-style: italic;
+  quotes: "\201C" "\201D";
+}
+
+blockquote#buffet:before { color:white; }
+
+#compound h1 { white-space: nowrap; }
+#compound label {
+  display: block;
+  text-align: right;
+  font-size: 11pt;
+  padding: 0.25em;
+  white-space: nowrap;
+}
+#compound input {
+  width: 6em;
+  padding-left: 4px;
+}
+
+#stash label {
+  display: block;
+  text-align: right;
+  font-size: 11pt;
+  white-space: nowrap;
+}
+#stash input {
+  width: 5em;
+  padding-left: 4px;
+  text-align: right;
+}
+#stash_months { margin-bottom: 0.5em; }
+#stash_total { font-weight: bold; }
+
+#selfquote {
+  color: black;  background-color: whitesmoke;
+  margin: 1em auto;  padding: 0.5em 1em;
+  max-width: 90%;
+}
+
+/* Beat the Market */
+#market {
+  display: inline-block;
+  margin: 1em auto;  padding: 1em;
+  position: relative;
+  text-align: center;
+  border: 10px ridge dimgrey;
+  color: #f7ffe7;  background-color: rgb(41, 95, 166);
+  box-shadow: 2px 3px 5px rgba(0,0,0,0.3), inset 2px 3px 5px rgba(0,0,0,0.3);
+}
+
+#market>h1 {
+  font: bold 3em Sans-Serif;
+  letter-spacing: 0.05em;  word-spacing: 0.2em;
+  padding: 0 0.5em;
+  text-shadow:
+    0 1px 0 #a0a0a0,
+    0 2px 0 #989898,
+    0 3px 0 #909090,
+    0 4px 0 #888888,
+    0 5px 0 #808080,
+    0 0 5px rgba(0,0,0,.3),
+    0 1px 3px rgba(0,0,0,.6),
+    1px 2px 5px rgba(0,0,0,.75),
+    2px 4px 10px rgba(0,0,0,.8),
+    5px 10px 10px rgba(0,0,0,.8),
+    15px 20px 20px rgba(0,0,0,.65);
+}
+
+#mktElapsed {
+  font-weight: bold;
+  font-size: 1.2em;
+  color: white;
+}
+
+#mktGraph {
+  background-color: white;
+  margin: 0.5em auto;  padding: 0;
+  border: 5px inset gray;
+  box-shadow: inset 2px 3px 5px rgba(0,0,0,0.5);
+  position: relative;
+}
+
+#mktOverlay {
+  position: absolute;
+  top: 40%;  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 1em;
+  color: inherit;  background-color: inherit;
+  border: 5px outset rgba(64, 64, 64, .70);
+}
+#mktOverlay input {
+  padding: 4px;
+  margin-bottom: 0.5em;
+}
+
+.mktError {
+  color: red;
+  font-size: 2em;  font-weight: bold;
+}
+
+#market input[name=zoom] {
+  margin: auto 0.5em 1em 2em;
+}
+
+#market button {
+  margin: 0.5em;  padding: 0.4em 0.6em;
+  font-size: 14pt;
+  color: #e1f6b2;  background: linear-gradient(#1F5729, #0F4118);
+  border: solid #03290A 4px;
+  box-shadow: 1px 2px 5px rgba(0,0,0,0.5);
+  border-radius: 28px;
+  text-shadow: 0px 0px 3px black;
+  cursor: pointer;
+}
+
+#market button#buy, #market button#sell {
+  margin-right: 0;
+  border-right-width: 2px;
+  border-radius: 28px 0 0 28px;
+}
+
+#market button#buyall, #market button#sellall {
+  margin-left: 0;
+  border-left-width: 2px;
+  border-radius: 0 28px 28px 0;
+}
+
+#market button:disabled {
+  opacity: 0.8;
+  color: #677e59;  background: #3a493c;
+  cursor: not-allowed;
+}
+
+#market button:hover:enabled {
+  color: #ebfec3;  background: linear-gradient(#366B3F, #1F5729);
+  text-shadow: 0 0 5px white;
+}
+
+#market button:active {
+  position: relative;  top: 2px;
+  outline: none;
+  box-shadow: 0 0 0 0 black, inset 0 0 6px 0 black;
+}
+
+#market table, #market td, #market th {
+  border: solid #295FA6 4px;
+  margin: auto auto 0.5em auto;
+  font-weight: normal;
+}
+#market td[id] {
+  margin: 0.25em;
+  min-width: 6em;
+  color: black;  background-color: darkseagreen;
+}
+#market td[id="youGain"], #market td[id="avgGain"] {
+  color: rgb(0, 255, 0);  background-color: inherit;
+  min-width: 5em;
+  text-align: right;
+}
+
+#mktScores caption {
+  color: black;
+  font-size: 18pt;
+}
+#mktScores td { text-align: center; }
+#mktScores td.pos { color: lime; }
+#mktScores td.neg { color: red; }
+#mktScores thead { background-color:  #a15b00;  padding: 1em; }
+
